@@ -3,6 +3,7 @@ minetest.register_craftitem("getter:getter",{
 	groups = {tools = 1},
 	inventory_image = "cursor.png",
 	liquids_pointable = true,
+	stack_max = 1,
 	on_place = function(itemstack, placer, pointed_thing)
 		if not(placer:is_player()) then
 			return
@@ -13,7 +14,7 @@ minetest.register_craftitem("getter:getter",{
 			return
 		end
 		local inv = placer:get_inventory()
-		if inv then
+		if inv and not(inv:contains_item("main", node.name)) then
 			inv:add_item("main", node.name)
 		end
 	end,
